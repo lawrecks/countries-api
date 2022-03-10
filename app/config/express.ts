@@ -1,0 +1,66 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import cors from 'cors';
+import routes from '../api/express/routes/v1';
+import { Request, Response, NextFunction, Express } from 'express';
+
+const expressConfig = (app: Express) => {
+  const env = app.get('env');
+
+  console.info('App is starting...');
+  console.info(`Environment is ${env}`);
+  console.info("Overriding 'Express' logger");
+
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  
+  app.use(morgan('dev'));
+  app.disable('x-powered-by');
+  app.use(cors());
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+      'Access-Control-Allow-Methods',
+      'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+    );
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'Authorization, Origin, Content-Type, Accept',
+    );
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+  });
+
+  app.use('/api/v1', routes);
+
+  // catch 404 and forward to error handler
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    const err: any = new Error('Route Not Found');
+    err.status = 404;
+    next(err);
+  });
+  // error handlers
+
+  // development error handler
+  // will print stacktrace
+  if (app.get('env') === 'development' || app.get('env') === 'test') {
+    app.use((err: any, req: Request, res: Response) =>
+      res.status(err.code || 500).json({
+        status: err.status,
+        code: err.code,
+        message: err.message,
+        data: err.data,
+      }),
+    );
+  }
+
+  // production error handler
+  // remove stacktrace
+  app.use((err: any, req: Request, res: Response) =>
+    res.status(err.code || 500).json({ message: err.message }),
+  );
+};
+
+export default expressConfig;
