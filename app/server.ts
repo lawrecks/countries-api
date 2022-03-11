@@ -1,12 +1,13 @@
 /* eslint-disable no-undef */
 import express from 'express';
+import morgan from 'morgan';
 import config, { initConfig, graphqlConfig } from './config';
 
 const app = express();
 const host = config.HOST;
 const port = config.PORT || 3033;
 const apiVersion = config.API_VERSION || 'v1';
-
+app.use(morgan('dev'));
 graphqlConfig(app);
 initConfig(app);
 

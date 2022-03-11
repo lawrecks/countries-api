@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "nodemon app/server.ts",
     "pretest": "cross-env NODE_ENV=test npm run lint",
-    "test": "cross-env NODE_ENV=test nyc --require @babel/register --reporter=lcov --reporter=text --reporter=text-summary mocha --exit --recursive --timeout=150000 tests/**/*.js",
-    "lint": "eslint . --ext .js ./",
-    "lint-fix": "eslint . --ext .js ./ --fix"
+    "test": "cross-env NODE_ENV=test nyc --require ts-node/register --reporter=lcov --reporter=text --reporter=text-summary mocha --exit --recursive --timeout=150000 tests/**/*.ts",
+    "lint": "eslint . --ext .ts ./",
+    "lint-fix": "eslint . --ext .ts ./ --fix"
   },
   "repository": {
     "type": "git",
@@ -44,8 +44,10 @@
   },
   "devDependencies": {
     "@types/app-root-path": "^1.2.4",
+    "@types/chai": "^4.3.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.1",
+    "@types/mocha": "^9.1.0",
     "@types/morgan": "^1.9.1",
     "@types/node": "^14.0.23",
     "@types/supertest": "^2.0.10",
