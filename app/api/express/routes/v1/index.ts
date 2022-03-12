@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import login from '../../controllers';
+import { validateLogin } from '../../validators/auth.validators';
 
 const router = Router();
 
@@ -11,5 +13,7 @@ router.get('/', (req, res) => {
       message: 'Welcome to countries API!',
     });
 });
+
+router.post('/login', validateLogin, login);
 
 export default router;
