@@ -37,20 +37,24 @@ const expressConfig = (app: Express) => {
   app.use((req: Request, res: Response, next: NextFunction) => {
     const err: any = new Error('Route Not Found');
     err.status = 404;
-    next(err);
+    return next(err);
   });
   // error handlers
 
   // development error handler
   // will print stacktrace
+  
   if (app.get('env') === 'development' || app.get('env') === 'test') {
-    app.use((err: any, req: Request, res: Response) =>
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+      console.log(err);
       res.status(err.code || 500).json({
         status: err.status,
         code: err.code,
         message: err.message,
         data: err.data,
-      }),
+      });
+    }
     );
   }
 
