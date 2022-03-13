@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response, NextFunction } from 'express';
-import { Error } from '../../../utils/response.helpers';
+import { Error } from '../../../utils/helpers/response.helpers';
 
 const dynamicValidator = async (schema: any, req: Request, type: string) => {
   const requestTypes: any = {

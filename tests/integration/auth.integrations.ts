@@ -15,6 +15,7 @@ describe('Login API', () => {
         expect(res.body.code).to.be.equal(200);
         expect(res.body.message).to.be.equal('Login Successful');
         expect(res.body.status).to.be.equal('success');
+        process.env.ACCESS_TOKEN = res.body.data.token;
         done();
       });
   });

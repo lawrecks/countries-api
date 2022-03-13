@@ -1,12 +1,5 @@
 import { Response } from "express";
 
-export const Success = (message: string, code: number, data = []) => ({
-  status: 'success',
-  message,
-  code,
-  data,
-});
-
 export const Error = (message: string, code: number) => ({
   status: 'error',
   message,
