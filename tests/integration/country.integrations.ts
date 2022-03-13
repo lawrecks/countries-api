@@ -3,8 +3,8 @@ import request from 'supertest';
 import nock from 'nock';
 import app from '../../app/server';
 import config from '../../app/config';
-import countryMock from '../mocks/country.mock.json';
-import ratesMock from '../mocks/rates.mock.json';
+import countryMock from '../mocks/country.mock';
+import ratesMock from '../mocks/rates.mock';
 
 
 describe('Country', () => {
