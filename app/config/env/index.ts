@@ -10,12 +10,13 @@ interface Environment {
   HOST?: string;
   API_VERSION?: string;
   JWT_SECRET: string;
+  FIXER_API_KEY: string;
 }
 
 const { APP_PORT: PORT, NODE_ENV } = process.env;
 
 // Define required environmental variables
-const requiredEnvs = ['JWT_SECRET'];
+const requiredEnvs = ['JWT_SECRET', 'FIXER_API_KEY'];
 
 // Throw error if required variable is not defined
 for (const item of requiredEnvs) {

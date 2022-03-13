@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable function-paren-newline */
 /* eslint-disable implicit-arrow-linebreak */
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import routes from '../api/express/routes/v1';
 import { Request, Response, NextFunction, Express } from 'express';
@@ -13,8 +12,6 @@ const expressConfig = (app: Express) => {
   console.info(`Environment is ${env}`);
   console.info("Overriding 'Express' logger");
 
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
   app.disable('x-powered-by');
   app.use(cors());
   app.use((req: Request, res: Response, next: NextFunction) => {

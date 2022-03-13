@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import generateToken from '../../../utils/auth.helpers';
-import { successResponse } from '../../../utils/response.helpers';
+import generateToken from '../../../utils/helpers/auth.helpers';
+import { successResponse } from '../../../utils/helpers/response.helpers';
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
